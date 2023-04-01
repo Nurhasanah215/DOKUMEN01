@@ -32,11 +32,26 @@
                   <div class="card-body">
                     <form action="{{route('alumni.update',['id_alumni' => $alumni->id_alumni])}}" enctype="multipart/form-data" method="POST">
                       @csrf
+                      @method('PUT')
                       {{csrf_field()}}
                       <input type="hidden" value="PUT" name="_method">
                       <div class="form-group">
-                      <label>Nama Lengkap</label>
-                      <input type="text" name="nama_lengkap" value="{{$alumni->nama_lengkap}}" class="form-control" placeholder="Masukkan Nama Lengkap Anda">
+                        <label>Nama Siswa</label>
+                           <select onblur="onSelect()" class="form-select" aria-label="Default select example" id="id_siswa" name="id_siswa" required 
+                           placeholder="Masukkan Siswa Anda">
+                            <option value="Masukkan Pilihan Anda">Masukkan Pilihan Anda</option>
+                            @foreach($siswa as $sw)
+                            <option value="<?= $sw->id_siswa ?>" {{ $sw->id_siswa == $alumni->id_siswa ? 'selected' : ''}}>{{$sw->nama_lengkap}}</option>
+                            @endforeach
+                            </select>
+                            @if ($errors->has('jk'))
+                        <span class="text-danger">{{ $errors->first('jk') }}</span>
+                        @endif
+                      </div>
+                    <div class="form-group">
+                      <label>Tahun</label>
+                      <input type="text" name="tahun"
+                      value="{{$alumni->tahun}}" class="form-control" placeholder="Masukkan Tahun Lulusan Anda">
                     </div>
                     <div class="form-group">
                       <label>No Ijazah</label>
@@ -46,17 +61,10 @@
                     <div class="form-group">
                       <label>Ijazah</label>
                       <input type="file" name="ijazah"
-                      class="form-control" placeholder="Masukkan SK Anda">
+                      class="form-control" placeholder="Masukkan ijazahAnda">
                       <images src="{{ url('storage/alumni/'.$alumni->ijazah) }}"widh="200px" height="100px">
                     </div>
-                     <div class="form-group">
-                      <label>Ijazah</label>
-                      <input type="file" name="ijazah"
-                      class="form-control" placeholder="Masukkan Ijazah Anda">
-                      <images src="{{ url('storage/alumni/'.$alumni->ijazah) }}"widh="200px" height="100px">
-                      </images>
-                    </div>
-           
+                    
                     <div class="card-footer text-right">
                       <button class="btn btn-primary mr-1" type="submit">Submit</button>
                       <button class="btn btn-secondary" type="reset">Reset</button>
@@ -73,4 +81,4 @@
     @include('dokumen.layout.footer')
     </div>
   </div>
-  
+  @endsection 

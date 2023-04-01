@@ -67,6 +67,7 @@
                         <td>
                           <form method="POST" action="{{route('guru.delete', ['id_guru' => $data->id_guru])}}">
                                 <a class="btn btn-warning btn-sm" href="{{route('guru.edit', ['id_guru' => $data->id_guru])}}" data-color="#ffffff"><i class="icon-copy fa fa-pen" aria-hidden="true"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{route('guru.detail', ['id_guru' => $data->id_guru])}}" data-color="#ffffff"><i class="icon-copy fa fa-eye" aria-hidden="true"></i></a>
                                  @csrf
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm tn-flat show_confirm" data-color="#ffffff" onclick="return confirm('Yakin ingin menghapus data ini ?')" data-toggle="tooltip"><i class="icon-copy fa fa-trash" aria-hidden="true"></i>

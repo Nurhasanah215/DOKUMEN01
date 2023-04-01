@@ -45,10 +45,10 @@ class GuruController extends Controller
                 'jk' => 'required',
                 'status_sertifikasi' => 'required',
                 'tgl_sertifikasi' => 'required',
-                'sk_guru' => 'required',
-                'ijazah' => 'required',
-                'kk' => 'required',
-                'ktp' => 'required',
+                'sk_guru' => 'required|mimes:jpg,jpeg,png|max:1024',
+                'ijazah' => 'required|mimes:jpg,jpeg,png|max:1024',
+                'kk' => 'required|mimes:jpg,jpeg,png|max:1024',
+                'ktp' => 'required|mimes:jpg,jpeg,png|max:1024',
 
             ],
             [
@@ -57,7 +57,7 @@ class GuruController extends Controller
                 'jk.required' => 'wajib di isi',
                 'status_sertifikasi.required' => 'wajib di isi',
                 'tgl_sertifikasi.required' => 'wajib di isi',
-                'sk_guru.required' => 'wajib di isi',
+                'sk_guru.required' => 'wajib di isi |mimes: file harus bertipe png/jpg/jpeg | file harus dibawah 1 mb',
                 'ijazah.required' => 'wajib di isi',
                 'kk.required' => 'wajib di isi',
                 'ktp.required' => 'wajib di isi',
@@ -165,7 +165,7 @@ class GuruController extends Controller
         Guru::create([
             'nuptk' => $request->nuptk,
     	'nama_lengkap' => $request->nama_lengkap,
-    	'jk' => $request -> jk,
+    	'jk' => $request ->jk,
     	'status_sertifikasi' => $request->status_sertifikasi,
     	'tgl_sertifikasi' => $request->tgl_sertifikasi,
     	'sk_guru' => $sk_guru,
@@ -298,5 +298,12 @@ class GuruController extends Controller
         // Guru::find($id_guru)->delete();
         DB::table('tbl_guru')->where('id_guru', $id_guru)->delete();
         return redirect()->route('guru.index')->with('success', 'Data Berhasil Di hapus');
+    }
+
+    public function detail($id_guru){
+        $guru = Guru::where('id_guru',$id_guru)->first();
+        // dd($guru);
+        return view('dokumen/guru/detail', compact('guru'));
+
     }
 }

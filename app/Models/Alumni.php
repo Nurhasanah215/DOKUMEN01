@@ -9,7 +9,9 @@ class Alumni extends Model
 {
     protected $table = "tbl_alumni";
     protected $fillable = [
+		'id_siswa',
     	'nama_lengkap',
+    	'tahun',
     	'no_ijazah',
     	'ijazah'
     ];

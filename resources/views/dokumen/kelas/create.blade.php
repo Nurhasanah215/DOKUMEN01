@@ -32,13 +32,26 @@
                   <div class="card-body">
                     <form action="{{route('kelas.store')}}" method="POST" enctype="multipart/form-data">
                       @csrf
+                     
                     <div class="form-group">
                       <label>Nama Lengkap</label>
                       <input type="text" name="nama_lengkap" class="form-control" placeholder="Masukkan Nama Lengkap Anda">
                     </div>
                     <div class="form-group">
+                      <label>Guru</label>
+                         <select onblur="onSelect()" class="form-select" aria-label="Default select example" id="id_guru" name="id_guru" required placeholder="Masukkan Nama Lengkap Anda">
+                          <option value="Masukkan Kelas Anda">Masukkan Kelas Anda</option>
+                          @foreach($kelas as $kl)
+                          <option value="<?= $kl->id_guru ?>">{{$kl->nama_lengkap}}</option>
+                          @endforeach
+                          </select>
+                          @if ($errors->has('id_guru'))
+                          <span class="text-danger">{{ $errors->first('id_guru') }}</span>
+                          @endif
+                    </div>
+                    <div class="form-group">
                       <label>Kelas</label>
-                         <select onblur="onSelect()" class="form-select" aria-label="Default select example" id="nama_kelas" name="jk" required placeholder="Masukkan Nama Lengkap Anda">
+                         <select onblur="onSelect()" class="form-select" aria-label="Default select example" id="nama_kelas" name="nama_kelas" required placeholder="Masukkan Nama Lengkap Anda">
                           <option value="Masukkan Kelas Anda">Masukkan Kelas Anda</option>
                           <option value="IPA 1">IPA 1</option>
                           <option value="IPA 2">IPA 2</option>
@@ -47,6 +60,9 @@
                           <option value="IPS 2">IPS 2</option>
                           <option value="IPS 3">IPS 3</option>
                           </select>
+                           @if ($errors->has('nama_kelas'))
+                      <span class="text-danger">{{ $errors->first('nama_kelas') }}</span>
+                      @endif
                     </div>
                     <div class="card-footer text-right">
                       <button class="btn btn-primary mr-1" type="submit">Submit</button>

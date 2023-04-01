@@ -46,19 +46,22 @@
                       <table class="table table-bordered table-md">
                         <tr>
                           <th>No</th>
-                          <th>Id Guru</th>
-                           <th>Nama Kelas</th>
+                          <th>Nama Guru</th>
+                          <th>Nama Lengkap</th>
+                           <th>Kelas</th>
                            <th>Aksi</th>
                         </tr>
                         @foreach($kelas as $index => $data)
                         <tr>
                           <td>{{$index+1}}</td>
-                          <td>{{$data ->id_guru}}</td>
+                          <td>{{$data ->nama_guru}}</td>
+                          <td>{{$data ->nama_lengkap}}</td>
                           <td>{{$data ->nama_kelas}}</td>
   
                         <td>
                           <form method="POST" action="{{route('kelas.delete', ['id_kelas' => $data->id_kelas])}}">
                                 <a class="btn btn-warning btn-sm" href="{{route('kelas.edit', ['id_kelas' => $data->id_kelas])}}" data-color="#ffffff"><i class="icon-copy fa fa-pen" aria-hidden="true"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{route('kelas.detail', ['id_kelas' => $data->id_kelas])}}" data-color="#ffffff"><i class="icon-copy fa fa-eye" aria-hidden="true"></i></a>
                                  @csrf
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm tn-flat show_confirm" data-color="#ffffff" data-toggle="tooltip"><i class="icon-copy fa fa-trash" aria-hidden="true"></i>
